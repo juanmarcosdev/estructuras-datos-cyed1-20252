@@ -2,6 +2,7 @@ package ui;
 
 import model.Pila;
 import model.Cola;
+import model.TablasHash;
 
 public class Main {
     public static void main(String[] args) {
@@ -48,6 +49,25 @@ public class Main {
             cola.dequeue();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("IndexOutOfBoundsException al hacer dequeue en cola vacía.");
+        }
+
+        System.out.println("\nPrueba de TablasHash ");
+        try {
+            TablasHash tabla = new TablasHash(5);
+
+            tabla.insert(1, 10);
+            tabla.insert(6, 20); //colision
+            tabla.insert(2, 30);
+
+            System.out.println("Busqueda 10 en key 1: " + tabla.search(1, 10));
+            System.out.println("Busqueda 20 en key 6: " + tabla.search(6, 20));
+            System.out.println("Busqueda 50 en key 2: " + tabla.search(2, 50));
+
+            tabla.delete(1, 10);
+            System.out.println("Buscar 10 en key 1 despues de eliminacion: " + tabla.search(1, 10));
+        } catch (Exception e) {
+            System.out.println("Error con TablasHash: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
