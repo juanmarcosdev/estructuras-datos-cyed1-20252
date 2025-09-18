@@ -3,6 +3,7 @@ package ui;
 import model.Pila;
 import model.Cola;
 import model.TablasHash;
+import model.ListaEnlazadaGenerica;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class Main {
                 System.out.println("Pop de pila: " + valor);
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("IndexOutOfBoundsException al hacer Pop en pila vacía.");
+            System.out.println("IndexOutOfBoundsException al hacer Pop en pila vacia.");
         }
 
         System.out.println("\n Prueba de Cola ");
@@ -48,7 +49,7 @@ public class Main {
 
             cola.dequeue();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("IndexOutOfBoundsException al hacer dequeue en cola vacía.");
+            System.out.println("IndexOutOfBoundsException al hacer dequeue en cola vacia.");
         }
 
         System.out.println("\nPrueba de TablasHash ");
@@ -67,6 +68,31 @@ public class Main {
             System.out.println("Buscar 10 en key 1 despues de eliminacion: " + tabla.search(1, 10));
         } catch (Exception e) {
             System.out.println("Error con TablasHash: " + e.getMessage());
+            e.printStackTrace();
+        }
+        System.out.println("\nPrueba de ListaEnlazadaGenerica");
+        try {
+
+            ListaEnlazadaGenerica<String> listaStrings = new ListaEnlazadaGenerica<>();
+            listaStrings.agregar("Hola");
+            listaStrings.agregar("CyED1");
+            System.out.println("Primer elemento listaStrings: " + listaStrings.obtener(0)); 
+            System.out.println("Segundo elemento listaStrings: " + listaStrings.obtener(1)); 
+            System.out.println("Tamaño listaStrings: " + listaStrings.size());
+            listaStrings.eliminar(0);
+            System.out.println("Primer elemento luego de eliminar: " + listaStrings.obtener(0)); 
+
+            ListaEnlazadaGenerica<Integer> listaEnteros = new ListaEnlazadaGenerica<>();
+            listaEnteros.agregar(10);
+            listaEnteros.agregar(20);
+            listaEnteros.agregar(30);
+            System.out.println("Tamaño listaEnteros: " + listaEnteros.size());
+            System.out.println("Elementos listaEnteros:");
+            for (int i = 0; i < listaEnteros.size(); i++) {
+                System.out.println(listaEnteros.obtener(i));
+            }
+        } catch (Exception e) {
+            System.out.println("Error con Lista enlazada generica: " + e.getMessage());
             e.printStackTrace();
         }
     }
