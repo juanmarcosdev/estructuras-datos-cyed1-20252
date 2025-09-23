@@ -1,4 +1,4 @@
-package model;
+package structures;
 
 public class Cola {
   private int head;

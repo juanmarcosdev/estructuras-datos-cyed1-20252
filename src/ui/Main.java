@@ -1,9 +1,13 @@
 package ui;
 
-import model.Pila;
-import model.Cola;
-import model.TablasHash;
-import model.ListaEnlazadaGenerica;
+import structures.Pila;
+import structures.Cola;
+import structures.TablasHash;
+import structures.ListaEnlazadaGenerica;
+import structures.PilaGenerica;
+import structures.Caja;
+import structures.PilaCajaGenerica;
+import structures.PilaCajaGenericaWildcard;
 
 public class Main {
     public static void main(String[] args) {
@@ -94,6 +98,65 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Error con Lista enlazada generica: " + e.getMessage());
             e.printStackTrace();
+        }
+
+        //Segunda sesion
+        System.out.println("\nPrueba de PilaGenerica<Integer>");
+        PilaGenerica<Integer> pilaGen = new PilaGenerica<>(5);
+        try {
+            pilaGen.Push(100);
+            pilaGen.Push(200);
+            pilaGen.Push(300);
+            pilaGen.Push(400);
+            pilaGen.Push(500);
+            try {
+                pilaGen.Push(600);
+            } catch (StackOverflowError e) {
+                System.out.println("StackOverflowError en PilaGenerica al intentar hacer push de mas.");
+            }
+            int elementosActuales = pilaGen.getTop();
+            for (int i = 0; i < elementosActuales; i++) {
+                Integer valor = pilaGen.Pop();
+                System.out.println("Pop PilaGenerica: " + valor);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("IndexOutOfBoundsException en PilaGenerica al hacer pop invalido.");
+        }
+
+        System.out.println("\nPrueba de PilaCajaGenerica con mismo tipo (String)");
+        PilaCajaGenerica<String> pilaCajaGen = new PilaCajaGenerica<>(5);
+        try {
+            Caja<String> c1 = new Caja<>();
+            c1.setContenido("Caja1 String");
+            Caja<String> c2 = new Caja<>();
+            c2.setContenido("Caja2 String");
+            pilaCajaGen.Push(c1);
+            pilaCajaGen.Push(c2);
+            int elementos = pilaCajaGen.getTop();
+            for (int i = 0; i < elementos; i++) {
+                Caja<String> c = pilaCajaGen.Pop();
+                System.out.println("Pop PilaCajaGenerica: " + c.getContenido());
+            }
+        } catch (Exception e) {
+            System.out.println("Error en PilaCajaGenerica: " + e.getMessage());
+        }
+
+        System.out.println("\nPrueba de PilaCajaGenericaWildcard");
+        PilaCajaGenericaWildcard pilaCajaGenW = new PilaCajaGenericaWildcard(5);
+        try {
+            Caja<Double> c3 = new Caja<>();
+            c3.setContenido(45.67);
+            Caja<String> c4 = new Caja<>();
+            c4.setContenido("Caja wildcard");
+            pilaCajaGenW.Push(c3);
+            pilaCajaGenW.Push(c4);
+            int elementos = pilaCajaGenW.getTop();
+            for (int i = 0; i < elementos; i++) {
+                Caja<?> c = pilaCajaGenW.Pop();
+                System.out.println("Pop PilaCajaGenericaWildcard: " + c.getContenido());
+            }
+        } catch (Exception e) {
+            System.out.println("Error en PilaCajaGenericaWildcard: " + e.getMessage());
         }
     }
 }

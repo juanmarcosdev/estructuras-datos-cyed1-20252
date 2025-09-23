@@ -1,4 +1,4 @@
-package model;
+package structures;
 
 public class ListaEnlazadaGenerica<T> {
     private Nodo<T> cabeza;

@@ -1,4 +1,4 @@
-package model;
+package structures;
 
 public class Nodo<T> {
     public T dato;

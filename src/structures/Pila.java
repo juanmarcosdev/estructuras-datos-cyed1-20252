@@ -1,4 +1,4 @@
-package model;
+package structures;
 
 import java.lang.IndexOutOfBoundsException;
 import java.lang.StackOverflowError;
