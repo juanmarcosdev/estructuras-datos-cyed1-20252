@@ -9,8 +9,7 @@ public class PilaGenerica<T> {
   private int size;
 
   public PilaGenerica(int n) {
-    this.arreglo = (T[]) new Object[n];  // creación del arreglo genérico
-    this.top = 0;
+    this.arreglo = (T[]) new Object[n];
     this.size = n;
   }
 

@@ -8,6 +8,7 @@ import structures.PilaGenerica;
 import structures.Caja;
 import structures.PilaCajaGenerica;
 import structures.PilaCajaGenericaWildcard;
+import structures.ColaGenerica;
 
 public class Main {
     public static void main(String[] args) {
@@ -157,6 +158,30 @@ public class Main {
             }
         } catch (Exception e) {
             System.out.println("Error en PilaCajaGenericaWildcard: " + e.getMessage());
+        }
+
+        System.out.println("\nPrueba de ColaGenerica");
+        ColaGenerica<Integer> colaGen = new ColaGenerica<>(3);
+        try {
+            colaGen.enqueue(10);
+            colaGen.enqueue(20);
+            colaGen.enqueue(30);
+
+            try {
+                colaGen.enqueue(40);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("IndexOutOfBoundsException al intentar enqueue de mas en la ColaGenerica.");
+            }
+
+            for (int i = 0; i < 3; i++) {
+                Integer valor = colaGen.dequeue();
+                System.out.println("Dequeue de ColaGenerica: " + valor);
+            }
+
+
+            colaGen.dequeue();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("IndexOutOfBoundsException al hacer dequeue en ColaGenerica vacia");
         }
     }
 }
